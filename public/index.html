@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tally Prime</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">T</span>
+      <span class="brand-name">Tally Prime</span>
+    </div>
+    <nav class="topnav">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#support">Support</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>Run Tally Prime from anywhere.</h1>
+        <p class="lead">
+          Securely access Tally Prime in your browser as a Remote App on Azure Virtual Desktop.
+          Sign in with your work account and your Tally session opens in a new tab — no install required.
+        </p>
+        <div class="cta-row">
+          <button id="signinBtn" class="btn btn-primary">Sign in</button>
+          <button id="launchBtn" class="btn btn-secondary" hidden>Open Tally Prime</button>
+          <button id="signoutBtn" class="btn btn-ghost" hidden>Sign out</button>
+        </div>
+        <p id="statusMsg" class="status"></p>
+      </div>
+    </section>
+
+    <section id="features" class="grid">
+      <div class="card">
+        <h3>Browser based</h3>
+        <p>Launch Tally Prime in any modern browser. Nothing to install on the user's device.</p>
+      </div>
+      <div class="card">
+        <h3>Bring your own license</h3>
+        <p>Activate your Tally license inside the session — your data, your license, your control.</p>
+      </div>
+      <div class="card">
+        <h3>Secure by design</h3>
+        <p>Identity is enforced with Microsoft Entra ID. Sessions run on Azure Virtual Desktop in India.</p>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2>How it works</h2>
+      <ol>
+        <li>Click <strong>Sign in</strong> and use your work or school account.</li>
+        <li>Click <strong>Open Tally Prime</strong> — a new tab loads the Azure Virtual Desktop client.</li>
+        <li>Pick the <em>Tally Prime</em> app tile and start working. Activate your Tally license on first launch.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer id="support">
+    <p>&copy; Tally Prime Cloud · Hosted on Microsoft Azure (Central India)</p>
+  </footer>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

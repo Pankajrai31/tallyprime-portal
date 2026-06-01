@@ -1,0 +1,15 @@
+{
+  "name": "tallyprime-portal",
+  "version": "1.0.0",
+  "description": "Public sign-in portal that launches Tally Prime as an Azure Virtual Desktop RemoteApp.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
