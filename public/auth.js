@@ -19,14 +19,8 @@ const msalConfig = {
 };
 
 const loginRequest = { scopes: ['openid', 'profile', 'email', 'User.Read'] };
-const registerRequest = {
-  scopes: loginRequest.scopes,
-  prompt: 'create',
-  extraQueryParameters: { signup: '1' }
-};
 
 const signinBtn = document.getElementById('signinBtn');
-const registerBtn = document.getElementById('registerBtn');
 const launchBtn = document.getElementById('launchBtn');
 const signoutBtn = document.getElementById('signoutBtn');
 const statusMsg = document.getElementById('statusMsg');
@@ -39,7 +33,6 @@ function setStatus(text) { statusMsg.textContent = text || ''; }
 function updateUi() {
   const signedIn = !!activeAccount;
   signinBtn.hidden = signedIn;
-  registerBtn.hidden = signedIn;
   launchBtn.hidden = !signedIn;
   signoutBtn.hidden = !signedIn;
   if (signedIn) {
@@ -89,16 +82,6 @@ signinBtn.addEventListener('click', async () => {
   } catch (e) {
     console.error(e);
     setStatus('Sign-in failed: ' + (e.message || e));
-  }
-});
-
-registerBtn.addEventListener('click', async () => {
-  try {
-    setStatus('Redirecting to register...');
-    await msalInstance.loginRedirect(registerRequest);
-  } catch (e) {
-    console.error(e);
-    setStatus('Register failed: ' + (e.message || e));
   }
 });
 
