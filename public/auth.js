@@ -91,8 +91,10 @@ async function init() {
     }
   }
 
-  if (activeAccount && !sessionStorage.getItem('tally_launched')) {
-    sessionStorage.setItem('tally_launched', '1');
+  // Versioned flag so older sessions that already auto-launched the old workspace URL
+  // will fire again with the new deep-link URL.
+  if (activeAccount && sessionStorage.getItem('tally_launched_v3') !== '1') {
+    sessionStorage.setItem('tally_launched_v3', '1');
     openTallyRemoteApp();
   }
 
@@ -113,6 +115,7 @@ launchBtn.addEventListener('click', () => openTallyRemoteApp());
 
 signoutBtn.addEventListener('click', async () => {
   sessionStorage.removeItem('tally_launched');
+  sessionStorage.removeItem('tally_launched_v3');
   await msalInstance.logoutRedirect({ postLogoutRedirectUri: window.location.origin + '/' });
 });
 
