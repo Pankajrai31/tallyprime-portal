@@ -11,8 +11,11 @@ const APP_CONFIG = {
   // client signs the user into their home tenant and shows the wrong (or empty) feed.
   resourceTenantId: '35ba5bb9-3c7b-4758-931e-11d472045692',
   authority: 'https://login.microsoftonline.com/35ba5bb9-3c7b-4758-931e-11d472045692',
-  // URL opened in a new tab after successful sign-in: AVD web client. User picks the "Tally Prime" tile.
-  avdWebClientUrl: 'https://client.wvd.microsoft.com/arm/webclient/index.html'
+  // AVD web client base URL.
+  avdWebClientUrl: 'https://client.wvd.microsoft.com/arm/webclient/index.html',
+  // Object ID of the published TallyPrime RemoteApp. Used to deep-link directly
+  // into the app, skipping the workspace tile screen.
+  tallyAppObjectId: '327ed529-c786-4b62-c28e-08debd09bc04'
 };
 
 const msalConfig = {
@@ -53,10 +56,15 @@ function updateUi() {
 }
 
 function openTallyRemoteApp() {
-  // Pin the AVD client to the resource tenant. Because we authenticated against the
-  // same tenant in this browser, AAD silently SSOs the user — no second sign-in,
-  // no "wrong tenant" issue.
-  const url = `${APP_CONFIG.avdWebClientUrl}?tenantId=${encodeURIComponent(APP_CONFIG.resourceTenantId)}`;
+  // Deep-link directly into the Tally Prime RemoteApp instead of the workspace view.
+  // The web client uses a hash-route /#/connect/{appObjectId} to auto-launch a single
+  // published resource. tenantId in the query forces the correct directory.
+  const params = new URLSearchParams({
+    tenantId: APP_CONFIG.resourceTenantId,
+    resourceid: APP_CONFIG.tallyAppObjectId,
+    autoLaunch: 'true'
+  });
+  const url = `${APP_CONFIG.avdWebClientUrl}?${params.toString()}#/connect/${APP_CONFIG.tallyAppObjectId}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
